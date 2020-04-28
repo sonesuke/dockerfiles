@@ -14,10 +14,14 @@ RUN apt-get update \
             fzf \
             vim \
             git \
+	    bash-completion \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && echo "alias fd='fdfind'" >> ~/.bashrc \
-    && echo "alias ls='exa'" >> ~/.bashrc
+    && echo "alias ls='exa'" >> ~/.bashrc \
+    && echo "if [ -f /etc/bash_completion ]; then" >> ~/.bashrc \
+    && echo ". /etc/bash_completion" >> ~/.bashrc \
+    && echo "fi" >> ~/.bashrc
 
 # intall procs
 RUN wget https://github.com/dalance/procs/releases/download/v0.9.20/procs-0.9.20-1.x86_64.rpm \
@@ -39,3 +43,5 @@ RUN wget https://github.com/BurntSushi/xsv/releases/download/0.13.0/xsv-0.13.0-x
     && tar xvf xsv-0.13.0-x86_64-unknown-linux-musl.tar.gz \
     && rm xsv-0.13.0-x86_64-unknown-linux-musl.tar.gz \
     && mv xsv /usr/bin
+
+# bash-completion
